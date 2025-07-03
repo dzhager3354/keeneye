@@ -1,6 +1,7 @@
 package ru.dzhager3354.keeneye.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.dzhager3354.keeneye.dto.CreateStudentDto;
 import ru.dzhager3354.keeneye.entity.Student;
@@ -12,12 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 public class StudentService {
     private StudentRepository studentRepository;
+    private final PasswordEncoder passwordEncoder;
+
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
     public Student createStudent(CreateStudentDto dto) {
         Student newStudent = Student.builder()
+                .username(dto.getUsername())
+                .password(passwordEncoder.encode(dto.getPassword()))
                 .surname(dto.getSurname())
                 .name(dto.getName())
                 .patronymic(dto.getPatronymic())

@@ -20,6 +20,14 @@ public class Student {
     @Min(0)
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    @NotBlank
+    private String username;
+
+    @Column(nullable = false)
+    @NotBlank
+    private String password;
+
     @Column(nullable = false)
     @NotBlank
     private String surname;
@@ -28,6 +36,11 @@ public class Student {
     private String name;
     @Column
     private String patronymic;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @Builder.Default
+    private Role userRole = Role.ROLE_STUDENT;
 
     private String groupName;
 

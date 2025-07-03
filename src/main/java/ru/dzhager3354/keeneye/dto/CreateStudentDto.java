@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateStudentDto {
     @NotBlank
+    private String username;
+    @NotBlank
+    private String password;
+    @NotBlank
     private String surname;
     @NotBlank
     private String name;
