@@ -23,7 +23,7 @@ public class AuthController {
     private UserDetailsService userDetailsService;
     private TokenManager tokenManager;
 
-    @PostMapping()
+    @PostMapping
     public JwtResponse createToken(@RequestBody JwtRequest request) throws Exception {
         try {
             authenticationManager.authenticate(

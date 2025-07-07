@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.dzhager3354.keeneye.dto.CreateStudentDto;
+import ru.dzhager3354.keeneye.dto.StudentUpdateDto;
 import ru.dzhager3354.keeneye.entity.Student;
 import ru.dzhager3354.keeneye.service.StudentService;
 
@@ -26,7 +27,7 @@ public class StudentController {
 
     @GetMapping("/all")
     @Operation(
-            summary = "Получение всех пользователей из бд"
+            summary = "Получение всех одногруппников"
     )
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
@@ -42,7 +43,7 @@ public class StudentController {
 
     @PostMapping("/create")
     @Operation(
-            summary = "Создание пользователя на основе дто"
+            summary = "Создание студента на основе дто"
     )
     public Student create(@Valid @RequestBody CreateStudentDto dto) {
         return studentService.createStudent(dto);
@@ -52,7 +53,7 @@ public class StudentController {
     @Operation(
             summary = "Обновление данных пользователя"
     )
-    public Student update(@Valid @RequestBody Student student) {
+    public Student update(@Valid @RequestBody StudentUpdateDto student) {
         return studentService.updateStudent(student);
     }
 

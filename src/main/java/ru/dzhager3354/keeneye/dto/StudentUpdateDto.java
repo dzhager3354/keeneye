@@ -1,6 +1,5 @@
 package ru.dzhager3354.keeneye.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,14 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateStudentDto {
-    private Long userId;
-    @NotBlank
+public class StudentUpdateDto {
+    private Long id;
     private String surname;
-    @NotBlank
     private String name;
     private String patronymic;
-    private Long group;
-    @NotBlank
     private String phone;
+    private Long groupId;
 }

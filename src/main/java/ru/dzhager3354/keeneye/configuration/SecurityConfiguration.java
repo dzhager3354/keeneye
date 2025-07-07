@@ -25,14 +25,6 @@ import ru.dzhager3354.keeneye.security.jwt.JwtFilter;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
-    private final Boolean isBasic;
-    private final JwtFilter filter;
-
-    public SecurityConfiguration(@Value("${auth.basic}") Boolean isBasic, JwtFilter filter) {
-        this.isBasic = isBasic;
-        this.filter = filter;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(7);
@@ -53,10 +45,11 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
-                                           AuthenticationManager authenticationManager) throws Exception {
+                                           AuthenticationManager authenticationManager,
+                                           JwtFilter filter) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/students/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/students/create", "/api/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/students/create", "/api/login", "/api/users/create").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
@@ -64,13 +57,8 @@ public class SecurityConfiguration {
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationManager(authenticationManager)
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
-
-        if (isBasic) {
-            http.httpBasic(Customizer.withDefaults());
-        } else {
-            http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-        }
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(new JwtAuthenticationEntryPoint()))
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -8,6 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import ru.dzhager3354.keeneye.security.AppUserDetails;
 
 import java.security.Key;
 import java.util.Date;
@@ -26,6 +27,9 @@ public class TokenManager {
 
     public String generateJwtToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        if (userDetails instanceof AppUserDetails userDetails1) {
+            claims.put("role", userDetails1.getRole());
+        }
         long millis = System.currentTimeMillis();
 
         return Jwts

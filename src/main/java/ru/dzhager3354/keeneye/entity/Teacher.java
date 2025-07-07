@@ -2,24 +2,23 @@ package ru.dzhager3354.keeneye.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
+
+import java.util.List;
 
 @Entity
-@Table(name = "students")
+@Table(name = "teacher")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+@Builder
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Min(0)
     private Long id;
 
     @Column(nullable = false)
@@ -31,14 +30,10 @@ public class Student {
     @Column
     private String patronymic;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private StudentGroup studentGroup;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
+    private List<StudentGroup> studentGroups;
 
-    @Column(nullable = false, length = 15)
-    @NotBlank
-    private String phone;
-
-    @OneToOne(mappedBy = "student")
+    @OneToOne(mappedBy = "teacher")
     @JsonBackReference
     private User user;
 }
