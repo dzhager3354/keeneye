@@ -15,6 +15,3 @@ token:
 
   time:
     expired: 3600
-
-auth:
-  basic: false

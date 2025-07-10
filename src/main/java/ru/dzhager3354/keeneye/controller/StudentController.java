@@ -1,15 +1,13 @@
 package ru.dzhager3354.keeneye.controller;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.dzhager3354.keeneye.dto.CreateStudentDto;
-import ru.dzhager3354.keeneye.dto.StudentUpdateDto;
+import ru.dzhager3354.keeneye.dto.UpdateStudentDto;
 import ru.dzhager3354.keeneye.entity.Student;
 import ru.dzhager3354.keeneye.service.StudentService;
 
@@ -17,7 +15,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/students")
+@RequestMapping("/api/students")
 @Tag(
         name = "Student controller",
         description = "Создание, редактирование и удаление студентов"
@@ -53,7 +51,7 @@ public class StudentController {
     @Operation(
             summary = "Обновление данных пользователя"
     )
-    public Student update(@Valid @RequestBody StudentUpdateDto student) {
+    public Student update(@Valid @RequestBody UpdateStudentDto student) {
         return studentService.updateStudent(student);
     }
 

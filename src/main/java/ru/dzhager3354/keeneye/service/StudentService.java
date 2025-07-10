@@ -3,10 +3,9 @@ package ru.dzhager3354.keeneye.service;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.dzhager3354.keeneye.dto.CreateStudentDto;
-import ru.dzhager3354.keeneye.dto.StudentUpdateDto;
+import ru.dzhager3354.keeneye.dto.UpdateStudentDto;
 import ru.dzhager3354.keeneye.entity.Student;
 import ru.dzhager3354.keeneye.entity.StudentGroup;
 import ru.dzhager3354.keeneye.entity.User;
@@ -50,7 +49,7 @@ public class StudentService {
         return studentRepository.findById(id).orElseThrow();
     }
 
-    public Student updateStudent(StudentUpdateDto student) {
+    public Student updateStudent(UpdateStudentDto student) {
         if (student.getId() == null) {
             throw new RuntimeException();
         }

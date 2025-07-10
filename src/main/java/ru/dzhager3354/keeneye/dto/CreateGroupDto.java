@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentUpdateDto {
-    private Long id;
-    private String surname;
+public class CreateGroupDto {
     private String name;
-    private String patronymic;
-    private String phone;
-    private Long groupId;
+    private Long teacherId;
 }

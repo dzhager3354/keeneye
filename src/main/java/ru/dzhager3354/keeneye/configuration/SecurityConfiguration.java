@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.dzhager3354.keeneye.entity.Role;
 import ru.dzhager3354.keeneye.security.jwt.JwtAuthenticationEntryPoint;
 import ru.dzhager3354.keeneye.security.jwt.JwtFilter;
 
@@ -48,7 +49,9 @@ public class SecurityConfiguration {
                                            AuthenticationManager authenticationManager,
                                            JwtFilter filter) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/students/**").permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/students/**").hasRole(Role.ROLE_STUDENT.getName())
+                        .requestMatchers("/api/teachers/**").hasRole(Role.ROLE_TEACHER.getName())
                         .requestMatchers(HttpMethod.POST, "/students/create", "/api/login", "/api/users/create").permitAll()
                         .anyRequest().authenticated()
                 )
