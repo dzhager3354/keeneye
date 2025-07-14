@@ -23,12 +23,12 @@ public class GroupController {
     }
 
     @PostMapping
-    public StudentGroup createStudentGroup(CreateStudentGroupDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
+    public StudentGroup createStudentGroup(@RequestBody CreateStudentGroupDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
         return groupService.createStudentGroup(dto, userDetails);
     }
 
     @PutMapping
-    public StudentGroup updateStudentGroup(UpdateStudentGroupDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
+    public StudentGroup updateStudentGroup(@RequestBody UpdateStudentGroupDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
         return groupService.updateStudentGroup(dto, userDetails);
     }
 }

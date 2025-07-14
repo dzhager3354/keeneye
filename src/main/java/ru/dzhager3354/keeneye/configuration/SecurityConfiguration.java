@@ -50,8 +50,8 @@ public class SecurityConfiguration {
                                            JwtFilter filter) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/students/**").hasRole(Role.ROLE_STUDENT.getName())
-                        .requestMatchers("/api/teachers/**").hasRole(Role.ROLE_TEACHER.getName())
+//                        .requestMatchers("/api/students/**").hasRole(Role.ROLE_STUDENT.getName())
+//                        .requestMatchers("/api/teachers/**").hasAnyAuthority()
                         .requestMatchers(HttpMethod.POST, "/api/login", "/api/users/create").permitAll()
                         .anyRequest().authenticated()
                 )

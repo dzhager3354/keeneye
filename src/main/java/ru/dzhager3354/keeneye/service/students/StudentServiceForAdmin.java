@@ -62,7 +62,15 @@ public class StudentServiceForAdmin implements IStudentService {
             throw new UserNotFoundException();
         }
 
-        return null;
+        Student student = studentRepository.findById(dto.getId()).get();
+        StudentGroup studentGroup = studentGroupRepository.findById(dto.getGroupId()).orElseThrow(StudentGroupNotFoundException::new);
+
+        student.setSurname(dto.getSurname());
+        student.setName(dto.getName());
+        student.setPatronymic(dto.getPatronymic());
+        student.setStudentGroup(studentGroup);
+        student.setPhone(dto.getPhone());
+        return studentRepository.save(student);
     }
 
     @Override

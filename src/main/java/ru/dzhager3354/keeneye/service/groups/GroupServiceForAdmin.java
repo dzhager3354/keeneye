@@ -41,7 +41,8 @@ public class GroupServiceForAdmin implements IGroupService {
 
     @Override
     public StudentGroup updateStudentGroup(UpdateStudentGroupDto dto, AppUserDetails details) {
-        if (dto.getId() == null || !studentGroupRepository.existsById(dto.getId())) {
+        System.out.println(dto);
+        if (!studentGroupRepository.existsById(dto.getId())) {
             throw new StudentGroupNotFoundException();
         }
 

@@ -1,5 +1,6 @@
 package ru.dzhager3354.keeneye.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +23,10 @@ public class StudentGroup {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "studentGroup")
+    @JsonBackReference
     private List<Student> students;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Teacher teacher;
 }

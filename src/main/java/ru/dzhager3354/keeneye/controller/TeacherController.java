@@ -26,12 +26,12 @@ public class TeacherController {
     }
 
     @PostMapping
-    public Teacher createTeacher(CreateTeacherDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
+    public Teacher createTeacher(@RequestBody CreateTeacherDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
         return service.createTeacher(dto, userDetails);
     }
 
     @PutMapping
-    public Teacher updateTeacher(UpdateTeacherDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
+    public Teacher updateTeacher(@RequestBody UpdateTeacherDto dto, @AuthenticationPrincipal AppUserDetails userDetails) {
         return service.updateTeacher(dto, userDetails);
     }
 
