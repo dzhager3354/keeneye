@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.dzhager3354.keeneye.dto.UpdateStudentDto;
 import ru.dzhager3354.keeneye.entity.Student;
 import ru.dzhager3354.keeneye.entity.StudentGroup;
-import ru.dzhager3354.keeneye.service.TeacherService;
+import ru.dzhager3354.keeneye.service.teachers.TeacherService;
 
 import java.util.List;
 

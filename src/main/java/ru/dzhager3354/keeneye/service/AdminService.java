@@ -3,12 +3,11 @@ package ru.dzhager3354.keeneye.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.dzhager3354.keeneye.dto.*;
-import ru.dzhager3354.keeneye.entity.Student;
-import ru.dzhager3354.keeneye.entity.StudentGroup;
-import ru.dzhager3354.keeneye.entity.Teacher;
+import ru.dzhager3354.keeneye.entity.*;
 import ru.dzhager3354.keeneye.exceptions.StudentGroupNotFoundException;
 import ru.dzhager3354.keeneye.exceptions.StudentNotFoundException;
 import ru.dzhager3354.keeneye.exceptions.TeacherNotFoundException;
+import ru.dzhager3354.keeneye.exceptions.UserNotFoundException;
 import ru.dzhager3354.keeneye.repository.StudentGroupRepository;
 import ru.dzhager3354.keeneye.repository.StudentRepository;
 import ru.dzhager3354.keeneye.repository.TeacherRepository;
@@ -63,12 +62,14 @@ public class AdminService {
     }
 
     public Teacher createTeacher(CreateTeacherDto dto) {
+        User user = userRepository.findById(dto.getUserId()).orElseThrow(UserNotFoundException::new);
+        user.setUserRole(Role.ROLE_TEACHER);
         return teacherRepository.save(
                 Teacher.builder()
                         .surname(dto.getSurname())
                         .name(dto.getName())
                         .patronymic(dto.getPatronymic())
-                        .user(userRepository.getReferenceById(dto.getUserId()))
+                        .user(user)
                         .build()
         );
     }
@@ -114,6 +115,7 @@ public class AdminService {
     }
 
     public StudentGroup updateGroup() {
-
+        //TODO:
+        return null;
     }
 }

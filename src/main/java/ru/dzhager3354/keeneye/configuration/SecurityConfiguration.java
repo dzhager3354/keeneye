@@ -52,6 +52,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/students/**").hasRole(Role.ROLE_STUDENT.getName())
                         .requestMatchers("/api/teachers/**").hasRole(Role.ROLE_TEACHER.getName())
+                        .requestMatchers("/api/admin/**").hasRole(Role.ROLE_ADMIN.getName())
                         .requestMatchers(HttpMethod.POST, "/students/create", "/api/login", "/api/users/create").permitAll()
                         .anyRequest().authenticated()
                 )

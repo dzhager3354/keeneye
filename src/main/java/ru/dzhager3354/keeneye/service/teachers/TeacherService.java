@@ -1,4 +1,4 @@
-package ru.dzhager3354.keeneye.service;
+package ru.dzhager3354.keeneye.service.teachers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
