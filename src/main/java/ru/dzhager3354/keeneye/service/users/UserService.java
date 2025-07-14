@@ -1,4 +1,4 @@
-package ru.dzhager3354.keeneye.service;
+package ru.dzhager3354.keeneye.service.users;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -19,6 +19,7 @@ public class UserService {
                 User.builder()
                         .username(dto.getUsername())
                         .password(encoder.encode(dto.getPassword()))
+                        .userRole(dto.getRole())
                         .build()
         );
     }
